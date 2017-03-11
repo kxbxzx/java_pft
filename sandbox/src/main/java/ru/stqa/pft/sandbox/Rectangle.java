@@ -3,7 +3,7 @@ package ru.stqa.pft.sandbox;
 /**
  * Created by Alexander on 11.03.2017.
  */
-public class Rectangle {
+public class Rectangle{
 
     public double a;
     public double b;

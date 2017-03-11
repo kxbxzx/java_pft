@@ -2,9 +2,10 @@ package ru.stqa.pft.sandbox;
 
 import com.sun.org.apache.regexp.internal.RE;
 
-public class MyFirstProgram {
+public class MyFirstProgram{
 
 	public static void main(String[] args){
+
 		hello("world");
 		hello("user");
 		hello("Sasha");
