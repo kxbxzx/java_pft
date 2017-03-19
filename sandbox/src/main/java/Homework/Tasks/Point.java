@@ -1,4 +1,4 @@
-package Homework.Task2;
+package Homework.Tasks;
 
 /**
  * Created by Alexander on 11.03.2017.
