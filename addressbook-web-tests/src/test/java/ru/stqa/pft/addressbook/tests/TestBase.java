@@ -1,0 +1,36 @@
+package ru.stqa.pft.addressbook.tests;
+
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
+
+/**
+ * Created by Alexander on 22.03.2017.
+ */
+public class TestBase {
+
+    public final ApplicationManager app = new ApplicationManager();
+    public FirefoxDriver wd;
+
+    public static boolean isAlertPresent(FirefoxDriver wd) {
+        try {
+            wd.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
+    }
+
+    @BeforeMethod
+    public void setUp() throws Exception {
+        app.init();
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        app.stop();
+    }
+
+}
