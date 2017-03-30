@@ -41,7 +41,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void initContactModification() {
-        click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img"));
+        click(By.cssSelector("img[alt='Edit']"));
     }
 
     public void editContactCreation() {
@@ -60,6 +60,6 @@ public class ContactHelper extends HelperBase {
     }
 
     public boolean isThereAContact() {
-        return isElementPresent((By.linkText("add new")));
+        return isElementPresent(By.cssSelector("img[alt='Edit']"));
     }
 }
