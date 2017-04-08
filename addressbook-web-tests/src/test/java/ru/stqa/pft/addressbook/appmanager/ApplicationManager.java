@@ -33,7 +33,7 @@ public class ApplicationManager {
             wd = new InternetExplorerDriver();
         }
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        wd.get("http://localhost/addressbook");
+        wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         sessionHelper = new SessionHelper(wd);
         navigationHelper = new NavigationHelper(wd);
@@ -56,4 +56,5 @@ public class ApplicationManager {
     public ContactHelper getContactHelper(){
         return contactHelper;
     }
+
 }
