@@ -9,7 +9,7 @@ import java.util.HashSet;
 
 public class ContactCreationTest extends TestBase {
 
-    @Test
+    @Test (enabled = false)
     public void testContactCreation() {
         app.getContactHelper().gotoHome();
         List<ContactData> before = app.getContactHelper().getContactList();

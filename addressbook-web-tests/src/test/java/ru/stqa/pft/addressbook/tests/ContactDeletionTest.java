@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ContactDeletionTest extends TestBase {
 
-    @Test
+    @Test (enabled = false)
     public void testContactDeletion(){
         app.getContactHelper().gotoHome();
         List<ContactData> before = app.getContactHelper().getContactList();
