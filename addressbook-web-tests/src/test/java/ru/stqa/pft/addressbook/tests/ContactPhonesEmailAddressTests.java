@@ -25,13 +25,15 @@ public class ContactPhonesEmailAddressTests extends TestBase{
     }
 
     private String mergeAddress(ContactData contact) {
-        return Arrays.asList(contact.getAddress()).stream().filter((s) -> ! s.equals(""))
+        return Arrays.asList(contact.getAddress())
+                .stream().filter((s) -> ! s.equals(""))
                 .map(ContactPhonesEmailAddressTests::cleaned)
                 .collect(Collectors.joining("\n"));
     }
 
     private String mergeEmail(ContactData contact) {
-        return Arrays.asList(contact.getEmail()).stream().filter((s) -> ! s.equals(""))
+        return Arrays.asList(contact.getEmail())
+                .stream().filter((s) -> ! s.equals(""))
                 .map(ContactPhonesEmailAddressTests::cleaned)
                 .collect(Collectors.joining("\n"));
     }
