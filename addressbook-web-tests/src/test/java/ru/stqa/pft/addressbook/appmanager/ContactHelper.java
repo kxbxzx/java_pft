@@ -90,6 +90,10 @@ public class ContactHelper extends HelperBase {
         }
     }
 
+    private void initContactInfoById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
+    }
+
     public int count(){
         return wd.findElements(By.name("selectedp[]")).size();
     }
@@ -148,6 +152,13 @@ public class ContactHelper extends HelperBase {
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
+    }
+
+    public String infoFromInfoPage(ContactData contact) {
+        initContactInfoById(contact.getId());
+        String contactContent = wd.findElement(By.id("content")).getText();
+        wd.navigate().back();
+        return contactContent;
     }
 }
 
