@@ -24,7 +24,11 @@ public class ContactModificationTest extends TestBase {
         app.contact().gotoHome();
         if (app.contact().all().size() == 0) {
             app.contact().create(new ContactData()
-                    .withName("Alexander").withSurname("Stepanov").withAddress("Moscow").withEmail("xkbzzx@gmail.com").withGroup("test1"), true);
+                    .withName("Alexander")
+                    .withSurname("Stepanov")
+                    .withAddress("Moscow")
+                    .withEmail("xkbzzx@gmail.com")
+                    .withGroup("test1"));
         }
     }
 
@@ -32,7 +36,7 @@ public class ContactModificationTest extends TestBase {
     public void testContactModification() {
         app.contact().gotoHome();
         if (!app.contact().isThereAContact()) {
-            app.contact().create(new ContactData(), true);
+            app.contact().create(new ContactData());
         }
         Contacts before = app.contact().all();
         ContactData modifyContact = before.iterator().next();

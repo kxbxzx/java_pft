@@ -23,7 +23,11 @@ public class ContactDeletionTest extends TestBase {
         app.contact().gotoHome();
         if (app.contact().all().size() == 0) {
                 app.contact().create(new ContactData()
-                        .withName("Alexander").withSurname("Stepanov").withAddress("Moscow").withEmail("xkbzzx@gmail.com").withGroup("test1"), true);
+                        .withName("Alexander")
+                        .withSurname("Stepanov")
+                        .withAddress("Moscow")
+                        .withEmail("xkbzzx@gmail.com")
+                        .withGroup("test1"));
             }
         }
 
@@ -31,7 +35,7 @@ public class ContactDeletionTest extends TestBase {
     @Test
     public void testContactDeletion(){
         if (! app.contact().isThereAContact()){
-            app.contact().create(new ContactData(), true);
+            app.contact().create(new ContactData());
         }
         Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
