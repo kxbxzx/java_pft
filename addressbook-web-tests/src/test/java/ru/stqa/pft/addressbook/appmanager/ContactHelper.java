@@ -25,9 +25,9 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void create(ContactData contact, boolean creation) {
+    public void create(ContactData contact) {
         gotoAddNewContact();
-        fillContactForm(contact, creation);
+        fillContactForm(contact);
         submitContactCreation();
         contactCache = null;
         gotoHome();
@@ -35,6 +35,13 @@ public class ContactHelper extends HelperBase {
 
     public void submitContactCreation() {
         click(By.xpath("//div[@id='content']/form/input[21]"));
+    }
+
+    public void fillContactForm(ContactData contactData) {
+        type(By.name("firstname"), contactData.getName());
+        type(By.name("lastname"), contactData.getSurname());
+        type(By.name("email"), contactData.getEmail());
+        type(By.name("address"), contactData.getAddress());
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
@@ -100,7 +107,7 @@ public class ContactHelper extends HelperBase {
 
     public void modify(ContactData contact){
         selectContactById(contact.getId());
-        fillContactForm(contact, false );
+        fillContactForm(contact);
         submitContactModification();
         contactCache = null;
         gotoHome();
@@ -156,11 +163,12 @@ public class ContactHelper extends HelperBase {
         cells.get(7).findElement(By.tagName("a")).click();
     }
 
-    public String infoFromInfoPage(ContactData contact) {
+    public ContactData infoFromInfoPage(ContactData contact) {
         initContactInfoById(contact.getId());
-        String contactContent = wd.findElement(By.id("content")).getText();
+        String allInfo = wd.findElement(By.id("content")).getText();
         wd.navigate().back();
-        return contactContent;
+        return new ContactData()
+                .setAllInfo(allInfo);
     }
 }
 

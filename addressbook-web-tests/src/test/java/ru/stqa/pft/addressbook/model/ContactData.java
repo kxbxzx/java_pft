@@ -41,6 +41,17 @@ package ru.stqa.pft.addressbook.model;
         private String homePhone;
         private String mobilePhone;
         private String workPhone;
+        private String allPhones;
+        private String allInfo;
+
+        public String getAllInfo() {
+            return allInfo;
+        }
+
+        public ContactData setAllInfo(String allInfo) {
+            this.allInfo = allInfo;
+            return this;
+        }
 
         public String getAllPhones() {
             return allPhones;
@@ -50,8 +61,6 @@ package ru.stqa.pft.addressbook.model;
             this.allPhones = allPhones;
             return this;
         }
-
-        private String allPhones;
 
         public ContactData() {
             this.id = id;
