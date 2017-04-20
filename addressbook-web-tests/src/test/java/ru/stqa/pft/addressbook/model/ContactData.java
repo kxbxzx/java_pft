@@ -5,6 +5,37 @@ package ru.stqa.pft.addressbook.model;
         private String name;
         private String surname;
         private String email;
+
+        public String getEmail2() {
+            return email2;
+        }
+
+        public ContactData withEmail2(String email2) {
+            this.email2 = email2;
+            return this;
+        }
+
+        public String getEmail3() {
+            return email3;
+        }
+
+        public ContactData withEmail3(String email3) {
+            this.email3 = email3;
+            return this;
+        }
+
+        public String getAllEmails() {
+            return allEmails;
+        }
+
+        public ContactData withAllEmails(String allEmails) {
+            this.allEmails = allEmails;
+            return this;
+        }
+
+        private String email2;
+        private String email3;
+        private String allEmails;
         private String address;
         private String group;
         private String homePhone;
@@ -138,6 +169,8 @@ package ru.stqa.pft.addressbook.model;
             this.workPhone = workPhone;
             return this;
         }
+
+
     }
 
 
