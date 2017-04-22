@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Alexander 0",
+    "surname": "Stepanov 0",
+    "email": "123@gmail.com 0",
+    "email2": "456@protonmail.ch 0",
+    "email3": "87865@mail.ru",
+    "address": "Moscow 0",
+    "group": "[test1]",
+    "homePhone": "77777 0",
+    "mobilePhone": "888888 0",
+    "workPhone": "333 333 0"
+  },
+  {
+    "name": "Alexander 1",
+    "surname": "Stepanov 1",
+    "email": "123@gmail.com 1",
+    "email2": "456@protonmail.ch 1",
+    "email3": "87865@mail.ru",
+    "address": "Moscow 1",
+    "group": "[test1]",
+    "homePhone": "77777 1",
+    "mobilePhone": "888888 1",
+    "workPhone": "333 333 1"
+  },
+  {
+    "name": "Alexander 2",
+    "surname": "Stepanov 2",
+    "email": "123@gmail.com 2",
+    "email2": "456@protonmail.ch 2",
+    "email3": "87865@mail.ru",
+    "address": "Moscow 2",
+    "group": "[test1]",
+    "homePhone": "77777 2",
+    "mobilePhone": "888888 2",
+    "workPhone": "333 333 2"
+  }
+]

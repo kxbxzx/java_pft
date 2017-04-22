@@ -40,7 +40,7 @@ public class GroupCreationTests extends TestBase {
     public Iterator<Object[]> validGroupsFromJson() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/groups.json"));
         String json = "";
-        String line = reader.readLine(); 
+        String line = reader.readLine();
         while(line != null){
             json += line;
             line = reader.readLine();

@@ -1,0 +1,38 @@
+<list>
+  <contact>
+    <name>Alexander 0</name>
+    <surname>Stepanov 0</surname>
+    <email>123@gmail.com 0</email>
+    <email2>456@protonmail.ch 0</email2>
+    <email3>87865@mail.ru</email3>
+    <address>Moscow 0</address>
+    <group>[test1]</group>
+    <homePhone>77777 0</homePhone>
+    <mobilePhone>888888 0</mobilePhone>
+    <workPhone>333 333 0</workPhone>
+  </contact>
+  <contact>
+    <name>Alexander 1</name>
+    <surname>Stepanov 1</surname>
+    <email>123@gmail.com 1</email>
+    <email2>456@protonmail.ch 1</email2>
+    <email3>87865@mail.ru</email3>
+    <address>Moscow 1</address>
+    <group>[test1]</group>
+    <homePhone>77777 1</homePhone>
+    <mobilePhone>888888 1</mobilePhone>
+    <workPhone>333 333 1</workPhone>
+  </contact>
+  <contact>
+    <name>Alexander 2</name>
+    <surname>Stepanov 2</surname>
+    <email>123@gmail.com 2</email>
+    <email2>456@protonmail.ch 2</email2>
+    <email3>87865@mail.ru</email3>
+    <address>Moscow 2</address>
+    <group>[test1]</group>
+    <homePhone>77777 2</homePhone>
+    <mobilePhone>888888 2</mobilePhone>
+    <workPhone>333 333 2</workPhone>
+  </contact>
+</list>
