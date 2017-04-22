@@ -86,10 +86,10 @@ public class ContactDataGeneration {
         List<ContactData> contacts = new ArrayList<ContactData>();
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData()
-                    .withName(String.format("Alexander %s", i)).withSurname(String.format("Stepanov %s", i))
-                    .withGroup(String.format("[test1]", i)).withAddress(String.format("Moscow %s", i))
-                    .withHomePhone(String.format("77777 %s", i)).withMobilePhone(String.format("888888 %s", i)).withWorkPhone(String.format("333 333 %s", i))
-                    .withEmail(String.format("123@gmail.com %s", i)).withEmail2(String.format("456@protonmail.ch %s", i)).withEmail3(String.format("87865@mail.ru", i)));
+                    .withName(String.format("Alexander%s", i)).withSurname(String.format("Stepanov%s", i))
+                    .withGroup(String.format("[test1]", i)).withAddress(String.format("Moscow", i))
+                    .withHomePhone(String.format("77777", i)).withMobilePhone(String.format("888888", i)).withWorkPhone(String.format("333 333", i))
+                    .withEmail(String.format("123@gmail.com", i)).withEmail2(String.format("456@protonmail.ch", i)).withEmail3(String.format("87865@mail.ru", i)));
         }
         return contacts;
     }
