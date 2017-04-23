@@ -15,8 +15,8 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
  */
 public class TestBase {
 
-    public static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
-
+    public static final ApplicationManager app
+            = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
     public static boolean isAlertPresent(WebDriver wd) {
         try {
