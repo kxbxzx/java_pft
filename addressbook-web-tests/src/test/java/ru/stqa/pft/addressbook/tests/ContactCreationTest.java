@@ -9,6 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -39,10 +40,19 @@ public class ContactCreationTest extends TestBase {
         }
     }
 
-    @Test(dataProvider = "validContactsFromJson")
+    @BeforeMethod
+    public void ensurePreconditions(){
+        app.goTo().groupPage();
+        if (app.db().groups().size() == 0) {
+                app.group().create(new GroupData().withName("Group1"));
+            }
+        }
+
+    @Test(enabled = false, dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact) {
+        Contacts before = app.db().contacts();
         app.contact().gotoHome();
-        Contacts before = app.contact().all();
+
         // File photo = new File("src/test/resources/java_logo.png");
         // ContactData contact = new ContactData()
         //        .withName("Alexander")
@@ -51,8 +61,9 @@ public class ContactCreationTest extends TestBase {
         //        .withEmail("xkbzzx@gmail.com")
         //        .withPhoto(photo);
         app.contact().create(contact);
-        Contacts after = app.contact().all();
-        assertThat(after.size(), equalTo(before.size() + 1));
+
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo
                 (before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
