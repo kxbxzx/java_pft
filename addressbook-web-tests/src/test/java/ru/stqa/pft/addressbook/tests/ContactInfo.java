@@ -16,21 +16,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class ContactInfo extends TestBase{
 
-    @BeforeMethod
-    public void ensurePreconditions() {
+    @Test
+    public void ContactPhonesEmailAddressTests() {
         app.contact().gotoHome();
-        if (app.contact().all().size() == 0) {
-            app.contact().create(new ContactData()
-                    .withName("Alexander")
-                    .withSurname("Stepanov")
-                    .withAddress("Moscow")
-                    .withHomePhone("666 666")
-                    .withMobilePhone("+999777")
-                    .withWorkPhone("123")
-                    .withEmail("xkbzzx@gmail.com")
-                    .withEmail2("ololol@protonmail.ch")
-                    .withEmail3("omgash@hotmail.com"));
-        }
+        ContactData contact = app.contact().all().iterator().next();
+        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+
+        assertThat(cleanAllAddress(contact.getAddress()), equalTo(cleanAllAddress(contactInfoFromEditForm.getAddress())));
+        assertThat(contact.getAllEmails(), equalTo(mergeAllEmails(contactInfoFromEditForm)));
+        assertThat(contact.getAllPhones(), equalTo(mergeAllPhones(contactInfoFromEditForm)));
     }
 
     @Test
@@ -38,10 +32,9 @@ public class ContactInfo extends TestBase{
         app.contact().gotoHome();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-        ContactData contactInfoFromInfoPage = app.contact().infoFromInfoPage(contact);
+        ContactData contactInfoFromDetails = app.contact().infoFromInfoPage(contact);
+        assertThat(mergeAllInfo(contactInfoFromEditForm), equalTo(cleanAllInfo(contactInfoFromDetails.getAllInfo())));
 
-        assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
-        assertThat(contact.getAllEmails(), equalTo(mergeAllEmails(contactInfoFromEditForm)));
     }
 
     private String mergeAllEmails(ContactData contact) {
@@ -50,14 +43,29 @@ public class ContactInfo extends TestBase{
               .collect(Collectors.joining("\n"));
         }
 
-    private String mergePhones(ContactData contact){
+    private String mergeAllPhones(ContactData contact){
         return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
               .stream().filter((s) -> ! s.equals(""))
-              .map(ContactInfo::clearEmptyLines)
+              .map(ContactInfo::cleanAllPhones)
               .collect(Collectors.joining("\n"));
     }
 
-    public static String clearEmptyLines(String s){
-        return s.replaceAll("\n\n", "\n");
+    private String mergeAllInfo (ContactData contact){
+        return Arrays.asList(contact.getName(), contact.getSurname(), contact.getAddress(), contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+                .stream().filter(s -> ! s.equals(""))
+                .map(ContactInfo::cleanAllInfo)
+                .collect(Collectors.joining(""));
+    }
+
+    public static String cleanAllPhones(String phone) {
+        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+    }
+
+    public static String cleanAllAddress(String address) {
+        return address.replaceAll("\\s", "");
+    }
+
+    public static String cleanAllInfo(String details) {
+        return details.replaceAll("\\s", "").replaceAll("[-()]", "").replaceAll("H:", "").replaceAll("M:", "").replaceAll("W:", "");
     }
 }
