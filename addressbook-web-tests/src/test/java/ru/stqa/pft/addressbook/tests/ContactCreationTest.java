@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -44,14 +45,16 @@ public class ContactCreationTest extends TestBase {
     public void ensurePreconditions(){
         app.goTo().groupPage();
         if (app.db().groups().size() == 0) {
-                app.group().create(new GroupData().withName("Group1"));
-            }
+            app.group().create(new GroupData().withName("Group1"));
         }
+    }
 
-    @Test(enabled = false, dataProvider = "validContactsFromJson")
+
+    @Test(dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact) {
+        Groups groups = app.db().groups();
         Contacts before = app.db().contacts();
-        app.contact().gotoHome();
+        app.goTo().homePage();
 
         // File photo = new File("src/test/resources/java_logo.png");
         // ContactData contact = new ContactData()
@@ -60,11 +63,13 @@ public class ContactCreationTest extends TestBase {
         //        .withAddress("Moscow")
         //        .withEmail("xkbzzx@gmail.com")
         //        .withPhoto(photo);
-        app.contact().create(contact);
-
-        assertThat(app.contact().count(), equalTo(before.size() + 1));
+        app.contacts().create(contact);
+        assertThat(app.contacts().count(), equalTo(before.size() + 1));
         Contacts after = app.db().contacts();
-        assertThat(after, equalTo
-                (before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+        assertThat(after,equalTo(
+                before.withAdded(contact.withId(after.stream().mapToInt((g) ->  g.getId()).max().getAsInt()))));
     }
+
+
+
 }
