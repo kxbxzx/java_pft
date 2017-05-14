@@ -13,12 +13,12 @@ public class Contacts extends ForwardingSet<ContactData> {
 
     private Set<ContactData> delegate;
 
-    public Contacts(Contacts contacts) {
-        this.delegate = new HashSet<ContactData>(contacts.delegate);
+    public Contacts() {
+        this.delegate = new HashSet<ContactData>();
     }
 
-    public Contacts() {
-        this.delegate = new HashSet<>();
+    public Contacts(Contacts contacts) {
+        this.delegate = new HashSet<ContactData>(contacts.delegate);
     }
 
     public Contacts(Collection<ContactData> contacts) {
@@ -41,4 +41,5 @@ public class Contacts extends ForwardingSet<ContactData> {
         contacts.remove(contact);
         return contacts;
     }
+
 }

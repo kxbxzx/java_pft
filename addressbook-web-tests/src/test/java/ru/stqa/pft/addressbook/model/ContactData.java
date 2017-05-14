@@ -78,15 +78,17 @@ public class ContactData {
         private String allEmails;
 
     @Transient
-    @Column(name = "photo")
     @Type(type = "text")
         private String photo;
 
 
-
-
     public File getPhoto() {
         return new File(photo);
+    }
+
+    public ContactData setPhoto(File photo) {
+        this.photo = photo.getPath();
+        return this;
     }
 
     public ContactData withPhoto(File photo) {
@@ -257,6 +259,10 @@ public class ContactData {
     }
 
 
+    public ContactData setId(int id) {
+        this.id = id;
+        return this;
+    }
 }
 
 

@@ -18,9 +18,9 @@ public class ContactInfo extends TestBase{
 
     @Test
     public void ContactPhonesEmailAddressTests() {
-        app.contact().gotoHome();
-        ContactData contact = app.contact().all().iterator().next();
-        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+        app.goTo().homePage();
+        ContactData contact = app.db().contacts().iterator().next();
+        ContactData contactInfoFromEditForm = app.contacts().infoFromEditForm(contact);
 
         assertThat(cleanAllAddress(contact.getAddress()), equalTo(cleanAllAddress(contactInfoFromEditForm.getAddress())));
         assertThat(contact.getAllEmails(), equalTo(mergeAllEmails(contactInfoFromEditForm)));
@@ -29,10 +29,10 @@ public class ContactInfo extends TestBase{
 
     @Test
     public void testContactInfo(){
-        app.contact().gotoHome();
-        ContactData contact = app.contact().all().iterator().next();
-        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-        ContactData contactInfoFromDetails = app.contact().infoFromInfoPage(contact);
+        app.goTo().homePage();
+        ContactData contact = app.db().contacts().iterator().next();
+        ContactData contactInfoFromEditForm = app.contacts().infoFromEditForm(contact);
+        ContactData contactInfoFromDetails = app.contacts().infoFromInfoPage(contact);
         assertThat(mergeAllInfo(contactInfoFromEditForm), equalTo(cleanAllInfo(contactInfoFromDetails.getAllInfo())));
 
     }
