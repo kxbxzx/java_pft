@@ -27,7 +27,7 @@ public class ContactHelper extends HelperBase {
 
     public void create(ContactData contact) {
         gotoAddNewContact();
-        fillContactForm(contact);
+        fillContactForm(contact, true);
         submitContactCreation();
         contactCache = null;
         gotoHome();
@@ -37,13 +37,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactForm(ContactData contactData) {
-        type(By.name("firstname"), contactData.getName());
-        type(By.name("lastname"), contactData.getSurname());
-        type(By.name("email"), contactData.getEmail());
-        type(By.name("address"), contactData.getAddress());
-        //attach(By.name("photo"), contactData.getPhoto());
-    }
+
 
     public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getName());
@@ -51,8 +45,9 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contactData.getEmail());
         type(By.name("address"), contactData.getAddress());
 
-        if(creation) new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        else {
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
@@ -103,12 +98,12 @@ public class ContactHelper extends HelperBase {
     }
 
     public int count(){
-        return wd.findElements(By.name("selectedp[]")).size();
+        return wd.findElements(By.name("selected[]")).size();
     }
 
     public void modify(ContactData contact){
         selectContactById(contact.getId());
-        fillContactForm(contact);
+        fillContactForm(contact, false);
         submitContactModification();
         contactCache = null;
         gotoHome();

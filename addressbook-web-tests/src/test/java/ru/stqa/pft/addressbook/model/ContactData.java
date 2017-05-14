@@ -257,12 +257,6 @@ public class ContactData {
         this.workPhone = workPhone;
         return this;
     }
-
-
-    public ContactData setId(int id) {
-        this.id = id;
-        return this;
-    }
 }
 
 
