@@ -3,10 +3,13 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -46,9 +49,7 @@ public class ContactData {
     @Type(type = "text")
         private String address;
 
-    @Expose
-    @Transient
-        private String group;
+
 
     @Expose
     @Column(name = "home")
@@ -81,6 +82,10 @@ public class ContactData {
     @Type(type = "text")
         private String photo;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name ="address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
 
     public File getPhoto() {
         return new File(photo);
@@ -141,13 +146,22 @@ public class ContactData {
         return this;
     }
 
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
+    public ContactData inGroup(GroupData group){
+        groups.add(group);
+        return this;
+    }
+
     public ContactData() {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.address = address;
-        this.group = group;
+
     }
 
         public int getId() {
@@ -168,10 +182,6 @@ public class ContactData {
 
         public String getAddress() {
             return address;
-        }
-
-        public String getGroup() {
-            return group;
         }
 
     @Override
@@ -223,11 +233,6 @@ public class ContactData {
 
     public ContactData withAddress(String address) {
         this.address = address;
-        return this;
-    }
-
-    public ContactData withGroup(String group) {
-        this.group = group;
         return this;
     }
 

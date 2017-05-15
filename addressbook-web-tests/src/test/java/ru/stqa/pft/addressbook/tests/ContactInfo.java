@@ -16,6 +16,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class ContactInfo extends TestBase{
 
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().homePage();
+        if (app.contacts().all().size() == 0) {
+            app.contacts().create(new ContactData()
+                    .withName("Alexander").withSurname("Stepanov").withAddress("Moscow")
+                    .withHomePhone("777774564").withMobilePhone("+4564745").withWorkPhone("66 54")
+                    .withEmail("xkbzx3@gmail.com").withEmail2("xkbzx2@gmail.com").withEmail3("xkbzx@gmail.com"));
+
+            app.goTo().homePage();
+        }
+    }
+
     @Test
     public void ContactPhonesEmailAddressTests() {
         app.goTo().homePage();

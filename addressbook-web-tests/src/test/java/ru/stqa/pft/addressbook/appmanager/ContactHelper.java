@@ -46,7 +46,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("address"), contactData.getAddress());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroups().size() > 0){
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -72,9 +75,22 @@ public class ContactHelper extends HelperBase {
         wd.findElements(By.cssSelector("tr[name=entry] input[name='selected[]']")).get(index).click();
     }
 
+    public void returnToContactPage() {click(By.linkText("group page"));}
+
     public void selectContactById(int id) {
-        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s'", id))).click();
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
+
+    public void removeContactFromGroup(int id) {
+        wd.findElement(By.xpath("//select[@name='group']//option[@value='" + id + "']")).click();
+    }
+
+    public void addContactToGroup(int id) {
+        wd.findElement(By.xpath("//select[@name='group']//option[@value='" + "" + "']")).click();
+        click(By.cssSelector("input[name='add']"));
+    }
+
+    public void addContactToGroup() {click(By.name("add"));}
 
     public void deleteContact() {
         click(By.xpath("//div[@id='content']/form[2]/input[2]"));
@@ -103,10 +119,14 @@ public class ContactHelper extends HelperBase {
 
     public void modify(ContactData contact){
         selectContactById(contact.getId());
+        editSelectedContact();
         fillContactForm(contact, false);
         submitContactModification();
         contactCache = null;
-        gotoHome();
+    }
+
+    private void editSelectedContact() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     }
 
     public void submitContactModification() {
